@@ -1,0 +1,48 @@
+
+
+.welcome-container
+{
+    padding: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+    padding: 0px;
+    margin: 0px;
+    color: white;
+}
+
+.h1 {
+    padding-top: 100px;
+}
+
+p {
+    margin-top: 50px;
+    color: #eeffee;
+}
+
+button
+{
+    margin-top: 60px;
+    padding: 14px 50px;
+    border-radius: 8px;
+    box-shadow: none;
+    border-style: none;
+    background-color: purple;
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    box-shadow: 0px 1px 9px 2px #dddddd33;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover
+{
+    box-shadow: none;
+    cursor: pointer;
+}
+
+button:active
+{
+    background-color: red;
+}
