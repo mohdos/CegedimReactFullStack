@@ -7,11 +7,9 @@ import './ListingScreen.css';
 
 
 
-class ListingScreen extends Component
-{
-    
-    constructor (props)
-    {
+class ListingScreen extends Component {
+
+    constructor(props) {
         super(props);
 
         this.LIMIT_PER_REQUEST = 5;
@@ -24,32 +22,25 @@ class ListingScreen extends Component
         this.fetchData = this.fetchData.bind(this);
     }
 
-    onScroll = e =>
-    {
+    onScroll = e => {
         console.log(window.innerHeight + window.scrollY, document.body.offsetHeight);
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) 
-        {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             // you're at the bottom of the page
-            console.log("New fetch", this.state)
             this.fetchData();
         }
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         this.fetchData();
         window.addEventListener("scroll", this.onScroll);
     }
 
-    componentWillUnmount()
-    {
+    componentWillUnmount() {
         window.removeEventListener("scroll", this.onScroll);
     }
 
     fetchData() {
-        console.log("In fetch");
-        if (this.state.isLoading || this.state.isDone)
-        {
+        if (this.state.isLoading || this.state.isDone) {
             console.log(this.state.isLoading, this.state.isDone);
             return;
         }
@@ -60,37 +51,32 @@ class ListingScreen extends Component
         };
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
-        this.setState({isLoading: true});
-        console.log("After that");
-        fetch(url, {cache: "no-cache", credentials: 'same-origin'})
-        .then(result => {
-            return result.json()
-        }).then(data => {
-            console.log("data ", data);
-            // const resultItems = data.map((value) => value.name);
-            console.log("length: ", data.length, url);
-            if (data.length == 0)
-            {
-                // setIsDone(true);
-                this.setState({isDone: true});
-            }
-            else
-            {
-                // setIsDone(false);
-                this.setState({isDone: false});
-            }
-            this.setState({items: [...this.state.items, ...data]});
-            // setIsLoading(false);
-            this.setState({isLoading: false});
-        });
+        this.setState({ isLoading: true });
+        fetch(url, { cache: "no-cache", credentials: 'same-origin' })
+            .then(result => {
+                return result.json()
+            }).then(data => {
+                console.log("data ", data);
+                // const resultItems = data.map((value) => value.name);
+                console.log("length: ", data.length, url);
+                if (data.length == 0) {
+                    // setIsDone(true);
+                    this.setState({ isDone: true });
+                }
+                else {
+                    // setIsDone(false);
+                    this.setState({ isDone: false });
+                }
+                this.setState({ items: [...this.state.items, ...data] });
+                this.setState({ isLoading: false });
+            });
     }
 
-    render()
-    {
+    render() {
         return (
             <div className="listings-container">
-                {this.state.items.map((value) => <ListingCard key={value.id} value={value.name}/>)}
-                {this.state.isDone && <ListingCard isDone={true} key={"isDone"} value={"The complete list has been loaded. No more to load"}/>}
+                {this.state.items.map((value) => <ListingCard key={value.id} value={value.name} />)}
+                {this.state.isDone && <ListingCard isDone={true} key={"isDone"} value={"The complete list has been loaded. No more to load"} />}
             </div>
         );
     }
@@ -99,7 +85,7 @@ class ListingScreen extends Component
 
 // function ListingScreen(props)
 // {
-    
+
 
 //     const LIMIT_PER_REQUEST = 5;
 
@@ -107,9 +93,9 @@ class ListingScreen extends Component
 //     const [isLoading, setIsLoading] = useState(false);
 //     const [isDone, setIsDone] = useState(false);
 //     const [scrollPos, setScrollPos] = useState(0);
-    
 
-    
+
+
 
 //     useEffect(() => {
 //         const onScroll = e => {
@@ -142,8 +128,8 @@ class ListingScreen extends Component
 //             // window.removeEventListener("load", onLoad);
 //         };
 
-        
-        
+
+
 //     }, [scrollPos]);
 
 //     return (
